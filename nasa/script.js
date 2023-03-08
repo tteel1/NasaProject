@@ -14,16 +14,57 @@ let resultsArray = [];
 function updateDOM(){
     resultsArray.forEach((result) => {
         //Card Container
-        const card = document.createElement('div')
+        const card = document.createElement('div');
         card.classList.add('card');
+
+
         // Link
-        const link = document.createElement('a')
+        const link = document.createElement('a');
         link.href= result.hdurl;
-        link.title = ' View Full Image'
+        link.title = 'View Full Image';
         link.target = '_blank';
 
         //image
-        const image = document.createElement()
+        const image = document.createElement('img');
+        image.src = result.url;
+        image.alt = 'Nasa Picture of the Day';
+        image.loading = 'lazy';
+        image.classList.add('card-img-top');
+
+        //Card Body
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        //Card Title
+        const cardTitle = document.createElement('h5');
+        cardTitle.classList.add('card-title');
+        cardTitle.textContent = result.title;
+        // Save Text
+        const saveText = document.createElement('p');
+        saveText.classList.add('clickable');
+        saveText.textContent = 'Add to Favorites';
+
+        //Card Text
+        const cardText = document.createElement ('p');
+        cardText.textContent = result.explanation;
+        // Footer Container
+        const footer = document.createElement('small')
+        footer.classList.add('text-muted');
+
+        //Date
+        const date = document.createElement('strong');
+        date.textContent = result.date;
+
+        // Copyright
+        const copyright =document.createElement ('span');
+        copyright.textContent = ` ${result.copyright}`;
+        //Append
+        footer.append(date, copyright);
+        cardBody.append(cardTitle, saveText, cardText, footer);
+        link.appendChild(image);
+        card.append(link, cardBody);
+        imagesContainer.appendChild(card);
+        //console.log(card);
 
     });
 
@@ -36,7 +77,7 @@ async function getNasaPictures(){
         const response = await fetch (apiUrl);
         resultsArray = await response.json();
         console.log (resultsArray);
-        updateDOM();
+       updateDOM();
     } catch (error) {
         
     }
