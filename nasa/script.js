@@ -1,3 +1,5 @@
+
+
 const resultsNav = document.getElementById ('resultsNav');
 const favoritesNav = document.getElementById ( 'favoritesNav');
 const imagesContainer = document.querySelector('.images-containter');
@@ -64,7 +66,7 @@ function updateDOM(){
         link.appendChild(image);
         card.append(link, cardBody);
         imagesContainer.appendChild(card);
-        //console.log(card);
+        onsole.log(card);
 
     });
 
